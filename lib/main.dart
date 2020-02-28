@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 import './src/app.dart';
-void main() => runApp(MangaXD);
+void main() => runApp(MangaXD());
