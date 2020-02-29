@@ -26,7 +26,7 @@ class _Result {
     _id = _result['i'];
     _title = _result['t'];
     _posterPath = _result['im'];
-    _category = _result['c'];
+    // _category = _result['c'];
   }
 
   String get id => _id;

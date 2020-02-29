@@ -18,4 +18,5 @@ class MangaBloc {
   }
 }
 
+
 final bloc = MangaBloc();

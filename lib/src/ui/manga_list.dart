@@ -8,7 +8,7 @@ class MangaList extends StatelessWidget {
     bloc.fetchAllManga();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Movies'),
+        title: Text('MangaXD'),
       ),
       body: StreamBuilder(
         stream: bloc.allManga,
@@ -30,10 +30,12 @@ class MangaList extends StatelessWidget {
         gridDelegate:
             new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
-          return Image.network(
-            'https://cdn.mangaeden.com/mangasimg/${snapshot.data.results[index].posterPath}',
-            fit: BoxFit.cover,
-          );
+          return snapshot.data.results[index].posterPath == null
+              ? Image.asset('assets/images/cnf.jpg')
+              : Image.network(
+                  'https://cdn.mangaeden.com/mangasimg/${snapshot.data.results[index].posterPath}',
+                  fit: BoxFit.cover,
+                );
         });
   }
 }
