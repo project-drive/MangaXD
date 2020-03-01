@@ -24,18 +24,112 @@ class MangaList extends StatelessWidget {
     );
   }
 
+  // Widget buildList(AsyncSnapshot<ItemModel> snapshot){
+  //   return ListView.builder(
+  //     itemCount: snapshot.data.results.length,
+  //     itemBuilder: (BuildContext context, int index){
+  //       return snapshot.data.results[index].posterPath == null
+  //           ? Image.asset('assets/images/cnf.jpg')
+  //           : Image.network(
+  //             'http://cdn.mangaeden.com/mangasimg/${snapshot.data.results[index].posterPath}',
+
+  //           );
+  //     }
+  //   );
+  // }
+
   Widget buildList(AsyncSnapshot<ItemModel> snapshot) {
-    return GridView.builder(
+    return ListView.builder(
         itemCount: snapshot.data.results.length,
-        gridDelegate:
-            new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
-          return snapshot.data.results[index].posterPath == null
-              ? Image.asset('assets/images/cnf.jpg')
-              : Image.network(
-                  'https://cdn.mangaeden.com/mangasimg/${snapshot.data.results[index].posterPath}',
-                  fit: BoxFit.cover,
-                );
+          return makeCard(snapshot, index);
         });
   }
 }
+
+// Card makeCard(snapshot,index){
+//   return Card(
+//     child: snapshot.data.results[index].posterPath == null ? Image.asset('assets/images/cnf.jpg') : Image.network('http://cdn.mangaeden.com/mangasimg/${snapshot.data.results[index].posterPath}',),
+//   );
+// }
+
+SizedBox makeCard(snapshot, index) {
+  String t = snapshot.data.results[index].title;
+  String imgPath = snapshot.data.results[index].posterPath;
+  const cardPadding = 5.0;
+  const titleSize = 20.0;
+  if (index % 2 == 0) {
+    return SizedBox(
+      width: 200,
+      height: 200,
+      child: Padding(
+        padding: const EdgeInsets.all(cardPadding),
+        child: Card(
+          color: Colors.red,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Padding(
+                  child: getImage(imgPath),
+                  padding: EdgeInsets.all(10),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  t,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: titleSize),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  } else {
+    return SizedBox(
+      width: 200,
+      height: 200,
+      child: Padding(
+        padding: const EdgeInsets.all(cardPadding),
+        child: Card(
+          color: Colors.blue,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  t,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: titleSize),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  child: getImage(imgPath),
+                  padding: EdgeInsets.all(10),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+Image getImage(path) {
+  // Given a path, returns image
+  if (path == null) {
+    return Image.asset(
+      'assets/images/cnf.jpg',
+      fit: BoxFit.fill,
+    );
+  } else {
+    return Image.network(
+      'http://cdn.mangaeden.com/mangasimg/${path}',
+      fit: BoxFit.fill,
+    );
+  }
+}
+
+// snapshot.data.results[index].posterPath == null ? Image.asset('assets/images/cnf.jpg') : Image.network('http://cdn.mangaeden.com/mangasimg/${snapshot.data.results[index].posterPath}',)
