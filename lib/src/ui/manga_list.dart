@@ -24,19 +24,6 @@ class MangaList extends StatelessWidget {
     );
   }
 
-  // Widget buildList(AsyncSnapshot<ItemModel> snapshot){
-  //   return ListView.builder(
-  //     itemCount: snapshot.data.results.length,
-  //     itemBuilder: (BuildContext context, int index){
-  //       return snapshot.data.results[index].posterPath == null
-  //           ? Image.asset('assets/images/cnf.jpg')
-  //           : Image.network(
-  //             'http://cdn.mangaeden.com/mangasimg/${snapshot.data.results[index].posterPath}',
-
-  //           );
-  //     }
-  //   );
-  // }
 
   Widget buildList(AsyncSnapshot<ItemModel> snapshot) {
     return ListView.builder(
@@ -47,11 +34,6 @@ class MangaList extends StatelessWidget {
   }
 }
 
-// Card makeCard(snapshot,index){
-//   return Card(
-//     child: snapshot.data.results[index].posterPath == null ? Image.asset('assets/images/cnf.jpg') : Image.network('http://cdn.mangaeden.com/mangasimg/${snapshot.data.results[index].posterPath}',),
-//   );
-// }
 
 SizedBox makeCard(snapshot, index) {
   String t = snapshot.data.results[index].title;
@@ -132,4 +114,3 @@ Image getImage(path) {
   }
 }
 
-// snapshot.data.results[index].posterPath == null ? Image.asset('assets/images/cnf.jpg') : Image.network('http://cdn.mangaeden.com/mangasimg/${snapshot.data.results[index].posterPath}',)
