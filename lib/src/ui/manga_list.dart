@@ -6,7 +6,7 @@ class MangaList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bloc.fetchAllManga();
-    return Scaffold(
+    return Scaffold(  
       appBar: AppBar(
         title: Text('MangaXD'),
       ),
